@@ -1,0 +1,8 @@
+/target
+/node_modules
+/.anchor
+/artifacts/*
+!/artifacts/README.md
+.env
+*.keypair.json
+
