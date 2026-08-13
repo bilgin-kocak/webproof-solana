@@ -28,7 +28,7 @@ import {
   WebProofClient,
 } from "@webproof/sdk";
 
-const PROGRAM_ID = new PublicKey("BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR");
+const PROGRAM_ID = new PublicKey("vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p");
 const MAX_CLAIM_AGE = 300n;
 
 const providerUrl = process.env.ANCHOR_PROVIDER_URL ?? "http://127.0.0.1:8899";

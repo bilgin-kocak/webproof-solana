@@ -9,7 +9,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PROGRAM_ID="BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR"
+PROGRAM_ID="vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p"
 RPC_PORT="${RPC_PORT:-8899}"
 RPC_URL="http://127.0.0.1:${RPC_PORT}"
 DEMO_DIR="$ROOT/.demo"

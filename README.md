@@ -192,15 +192,26 @@ bash scripts/deploy-devnet.sh    # deploys under your own program id
 WEBPROOF_PROGRAM_ID=<program id> pnpm demo:devnet
 ```
 
-<!-- Fill in after running the deployment: -->
 | | |
 |---|---|
 | Network | devnet |
-| Program ID | _pending deployment_ |
-| Config PDA | _pending deployment_ |
-| Verifier public key | _pending deployment_ |
-| Example transaction | _pending deployment_ |
-| Example claim PDA | _pending deployment_ |
+| Program ID | [`vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p`](https://explorer.solana.com/address/vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p?cluster=devnet) |
+| Config PDA | [`FkVjJUj1VausZhqY5ouTgWYD4F113rrH6V79NGR9C5Nq`](https://explorer.solana.com/address/FkVjJUj1VausZhqY5ouTgWYD4F113rrH6V79NGR9C5Nq?cluster=devnet) |
+| Verifier public key | `2a520253fbf3002f6d26efb0d8b37a5b6494f2e84454fee80eeadf2a3d19d73b` |
+| Example transaction | [`3gPFgWQeB6AeZKugLQwUVvXt6VkvNkfgnv5UHpeANKEffaH1wVKLFBKr2SeGsJ8xpv8SMs2PUgnQ42pvBSVVrDhe`](https://explorer.solana.com/tx/3gPFgWQeB6AeZKugLQwUVvXt6VkvNkfgnv5UHpeANKEffaH1wVKLFBKr2SeGsJ8xpv8SMs2PUgnQ42pvBSVVrDhe?cluster=devnet) |
+| Example claim PDA | [`Cda29xbU3s25ehTRwu5g5WYXmgQWtogbfqzWTrgeHFhP`](https://explorer.solana.com/address/Cda29xbU3s25ehTRwu5g5WYXmgQWtogbfqzWTrgeHFhP?cluster=devnet) |
+
+The example claim proves `/meta/version = 1.2` from the TLSNotary HTTPS test
+fixture (`test-server.io`); the stored `provenance_hash`
+(`4b74a3c2…57ebbd0a`) is the SHA-256 of the TLSNotary presentation artifact
+that produced it. Decode it yourself:
+
+```bash
+pnpm webproof get \
+  --claim-id 34fd8fbbd4f06d569eab24072b7bffc7b0c6e822d22d47a90bac9a20d4d2b2a1 \
+  --rpc https://api.devnet.solana.com \
+  --program-id vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p
+```
 
 ## Tests
 
@@ -234,7 +245,6 @@ an understandable example.
 
 ## Roadmap
 
-* Devnet deployment evidence in this README.
 * Finer-grained JSON disclosure (reveal only the claimed field; the MVP
   reveals the full response body to the verifier — tracked as a TODO).
 * Independent/hosted notary support when the pinned release line ships one.

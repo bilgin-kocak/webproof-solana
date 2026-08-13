@@ -16,7 +16,7 @@ use errors::WebProofError;
 use state::{ClaimV1, VerifiedClaim, WebProofConfig};
 use verification::{validate_claim, verify_preceding_ed25519, DOMAIN};
 
-declare_id!("BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR");
+declare_id!("vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p");
 
 #[program]
 pub mod webproof {
