@@ -7,6 +7,7 @@ node_modules/
 !/artifacts/README.md
 .env
 *.keypair.json
+.DS_Store
 dist/
 !/artifacts/example
 !/artifacts/example/**

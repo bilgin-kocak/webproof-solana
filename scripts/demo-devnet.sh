@@ -10,7 +10,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RPC_URL="${SOLANA_RPC_URL:-https://api.devnet.solana.com}"
-PROGRAM_ID="${WEBPROOF_PROGRAM_ID:-BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR}"
+PROGRAM_ID="${WEBPROOF_PROGRAM_ID:-vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p}"
 KEYPAIR="${SOLANA_KEYPAIR:-$HOME/.config/solana/id.json}"
 
 echo "==> Building Rust TLSNotary binaries (release)..."

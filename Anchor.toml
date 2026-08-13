@@ -5,14 +5,17 @@ anchor_version = "0.31.1"
 resolution = true
 skip-lint = false
 
-[programs.localnet]
-webproof = "BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR"
-
 [programs.devnet]
-webproof = "BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR"
+webproof = "vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p"
+
+[programs.localnet]
+webproof = "vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p"
+
+[registry]
+url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [workspace]
