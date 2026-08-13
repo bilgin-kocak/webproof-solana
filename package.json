@@ -1,0 +1,12 @@
+{
+  "name": "webproof-solana",
+  "private": true,
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "build": "pnpm --filter @webproof/sdk build",
+    "lint": "pnpm --filter @webproof/sdk lint",
+    "test": "pnpm --filter @webproof/sdk test",
+    "demo:local": "echo 'Requires TLSNotary notary-server and solana-test-validator; see README.md' && exit 1",
+    "demo:devnet": "echo 'Devnet deployment is not published; see README.md' && exit 1"
+  }
+}
