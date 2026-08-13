@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = ["crates/webproof-core", "crates/webproof-verifier", "programs/webproof"]
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+rust-version = "1.79"
+
+[workspace.dependencies]
+anchor-lang = "0.31.1"
+borsh = { version = "1.5.7", features = ["derive"] }
+ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
+hex = "0.4.3"
+rand = "0.8.5"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+sha2 = "0.10.9"
+thiserror = "2.0.12"
+url = "2.5.4"
+
