@@ -1,11 +1,18 @@
 [workspace]
 resolver = "2"
 members = ["crates/webproof-core", "crates/webproof-verifier", "programs/webproof"]
+# The TLSNotary integration lives in its own workspace because the pinned
+# TLSNotary release requires a newer Rust toolchain (1.95.0) than the Anchor
+# toolchain used here. See crates/tlsn-demo/README.md.
+exclude = ["crates/tlsn-demo"]
 
 [workspace.package]
 edition = "2021"
 license = "Apache-2.0"
-rust-version = "1.79"
+rust-version = "1.85"
+
+[profile.release]
+overflow-checks = true
 
 [workspace.dependencies]
 anchor-lang = "0.31.1"

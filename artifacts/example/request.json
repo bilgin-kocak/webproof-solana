@@ -1,0 +1,5 @@
+{
+  "field": "/meta/version",
+  "fixture": true,
+  "url": "https://test-server.io/formats/json"
+}

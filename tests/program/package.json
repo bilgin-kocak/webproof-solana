@@ -1,0 +1,21 @@
+{
+  "name": "@webproof/program-tests",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "tsx --test webproof.test.ts"
+  },
+  "dependencies": {
+    "@noble/curves": "1.9.0",
+    "@noble/hashes": "1.8.0",
+    "@solana/web3.js": "1.98.2",
+    "@webproof/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "tsx": "4.19.4",
+    "typescript": "5.8.3"
+  }
+}

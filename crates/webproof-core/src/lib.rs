@@ -130,6 +130,50 @@ mod tests {
         assert_eq!(c.validate(1_700_000_000, 400), Err(ClaimError::TimeWindow));
     }
     #[test]
+    fn rejects_too_old_and_wrong_version() {
+        let mut c = claim();
+        // issued 400s ago with max_age 300, not yet expired.
+        c.expires_at = 1_700_000_500;
+        assert_eq!(c.validate(1_700_000_400, 300), Err(ClaimError::TooOld));
+        let mut c = claim();
+        c.version = 2;
+        assert_eq!(c.validate(1_700_000_010, 300), Err(ClaimError::Version));
+    }
+    #[test]
+    fn enforces_exact_length_boundaries() {
+        let mut c = claim();
+        c.source_host = "h".repeat(128);
+        c.claim_key = "k".repeat(128);
+        c.claim_value = "v".repeat(256);
+        assert!(c.validate(1_700_000_010, 300).is_ok());
+        let mut c = claim();
+        c.source_host = "h".repeat(129);
+        assert_eq!(
+            c.validate(1_700_000_010, 300),
+            Err(ClaimError::Length("source_host"))
+        );
+        let mut c = claim();
+        c.claim_key = "k".repeat(129);
+        assert_eq!(
+            c.validate(1_700_000_010, 300),
+            Err(ClaimError::Length("claim_key"))
+        );
+        let mut c = claim();
+        c.claim_key = String::new();
+        assert_eq!(
+            c.validate(1_700_000_010, 300),
+            Err(ClaimError::Length("claim_key"))
+        );
+    }
+    #[test]
+    fn borsh_round_trips() {
+        let c = claim();
+        let bytes = c.canonical_bytes();
+        let back: ClaimV1 = borsh::from_slice(&bytes).unwrap();
+        assert_eq!(back, c);
+        assert_eq!(back.canonical_bytes(), bytes);
+    }
+    #[test]
     fn matches_repository_golden_vector() {
         // Keep the checked-in vector text-only so it can be reviewed by PR
         // tooling that does not render binary files.
