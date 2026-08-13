@@ -1,8 +1,12 @@
 /target
-/node_modules
+crates/tlsn-demo/target
+node_modules/
 /.anchor
+/.demo
 /artifacts/*
 !/artifacts/README.md
 .env
 *.keypair.json
-
+dist/
+!/artifacts/example
+!/artifacts/example/**

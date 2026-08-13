@@ -1,0 +1,22 @@
+{
+  "name": "@webproof/cli",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "bin": { "webproof": "./src/index.ts" },
+  "scripts": {
+    "webproof": "tsx src/index.ts",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@solana/web3.js": "1.98.2",
+    "@webproof/sdk": "workspace:*",
+    "commander": "13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "tsx": "4.19.4",
+    "typescript": "5.8.3"
+  }
+}

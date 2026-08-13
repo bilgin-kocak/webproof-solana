@@ -1,0 +1,8 @@
+# The pinned TLSNotary release (v0.1.0-alpha.15) transitively requires
+# rustc >= 1.95 (mpz-fields declares rust-version = "1.95"), which is newer
+# than the toolchain used by the Anchor workspace at the repository root.
+# This workspace therefore pins its own toolchain.
+[toolchain]
+channel = "1.95.0"
+components = ["rustfmt", "clippy"]
+profile = "minimal"

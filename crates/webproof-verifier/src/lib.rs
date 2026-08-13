@@ -37,6 +37,21 @@ impl VerifiedTlsData {
             artifact,
         }
     }
+
+    /// Verified TLS server identity (from the certificate chain).
+    pub fn host(&self) -> &str {
+        &self.host
+    }
+
+    /// Disclosed request path.
+    pub fn path(&self) -> &str {
+        &self.path
+    }
+
+    /// Disclosed, authenticated response body.
+    pub fn response(&self) -> &Value {
+        &self.response
+    }
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -72,6 +87,7 @@ impl ClaimSigner {
         self.key.verifying_key()
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn verify_and_sign<V: TlsnProofVerifier>(
         &self,
         verifier: &V,
@@ -188,6 +204,55 @@ mod tests {
             ),
             Err(Error::Tlsn)
         ));
+    }
+    #[test]
+    fn non_https_expected_url_fails() {
+        assert!(matches!(
+            signer().verify_and_sign(
+                &Mock(true),
+                b"p",
+                &Url::parse("http://api.example.com/data").unwrap(),
+                "/price",
+                100,
+                300,
+                [0; 32]
+            ),
+            Err(Error::Host)
+        ));
+    }
+    #[test]
+    fn any_modified_claim_field_breaks_the_signature() {
+        use ed25519_dalek::Verifier;
+        let s = signer();
+        let out = s
+            .verify_and_sign(
+                &Mock(true),
+                b"proof",
+                &Url::parse("https://api.example.com/data").unwrap(),
+                "/price",
+                100,
+                300,
+                [9; 32],
+            )
+            .unwrap();
+        let sig = Signature::from_slice(&out.signature).unwrap();
+        let verify = |c: &ClaimV1| s.public_key().verify(&c.signing_message(), &sig).is_ok();
+        assert!(verify(&out.claim));
+        let mutations: Vec<Box<dyn Fn(&mut ClaimV1)>> = vec![
+            Box::new(|c| c.source_host = "api.evil.com".into()),
+            Box::new(|c| c.claim_key = "/other".into()),
+            Box::new(|c| c.claim_value = "99.99".into()),
+            Box::new(|c| c.issued_at += 1),
+            Box::new(|c| c.expires_at += 1),
+            Box::new(|c| c.nonce = [0xAA; 32]),
+            Box::new(|c| c.provenance_hash = [0xBB; 32]),
+            Box::new(|c| c.version = 2),
+        ];
+        for mutate in mutations {
+            let mut modified = out.claim.clone();
+            mutate(&mut modified);
+            assert!(!verify(&modified), "mutation should invalidate signature");
+        }
     }
     #[test]
     fn deceptive_host_and_missing_field_fail() {

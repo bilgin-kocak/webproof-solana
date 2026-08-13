@@ -2,7 +2,11 @@
   "name": "@webproof/sdk",
   "version": "0.1.0",
   "type": "module",
-  "scripts": { "build": "tsc -p tsconfig.json", "lint": "tsc --noEmit -p tsconfig.json", "test": "vitest run" },
-  "dependencies": { "@solana/web3.js": "1.98.2", "borsh": "2.0.0", "@noble/hashes": "1.8.0" },
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" } },
+  "scripts": { "build": "tsc -p tsconfig.json", "lint": "tsc --noEmit -p tsconfig.lint.json", "test": "vitest run" },
+  "dependencies": { "@solana/web3.js": "1.98.2", "@noble/hashes": "1.8.0" },
   "devDependencies": { "@types/node": "22.15.3", "typescript": "5.8.3", "vitest": "3.1.2" }
 }
