@@ -25,7 +25,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..", "..");
 const tlsnWorkspace = join(repoRoot, "crates", "tlsn-demo");
 
-const DEFAULT_PROGRAM_ID = "BU1KznoqTFTHgYpcvgFAS5AqqtqnwrrcjLAczpHwgKMR";
+const DEFAULT_PROGRAM_ID = "vKofkBS5rcgK3V8HemwiZZygPQYd4e6GTyUGTvFRB7p";
 
 interface ChainOpts {
   rpc: string;
